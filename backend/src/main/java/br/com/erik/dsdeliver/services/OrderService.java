@@ -43,4 +43,12 @@ public class OrderService {
         return new OrderDTO(order);
     }
 
+    @Transactional
+    public OrderDTO setDelivered(Long id){
+        Order order = orderRepository.getOne(id); // getOne não vai no banco de dados
+        order.setStatus(OrderStatus.DELIVERED);
+        order = orderRepository.save(order);
+        return new OrderDTO(order);
+    }
+
 }
